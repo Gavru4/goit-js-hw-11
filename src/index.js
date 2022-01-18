@@ -14,19 +14,22 @@ const loadBtn = document.querySelector('.load-more');
 
 input.form.addEventListener('submit', onInputValue);
 
+let page = 1;
+
 function onInputValue(e) {
   e.preventDefault(getImage());
   const inputValue = input.value;
-
-  getImage(inputValue).then(data => {
+  page = 1;
+  getImage(inputValue, page).then(data => {
+    console.log(data.data);
     if (data.data.hits.length === 0) {
       return Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.',
       );
     }
-    gallery.insertAdjacentHTML('afterbegin', renderMarkup(data));
+    gallery.innerHTML = renderMarkup(data);
     lightbox.refresh();
-    loadBtn.classList.toggle('is-hidden');
+    loadBtn.classList.remove('is-hidden');
     return Notify.success(`"Hooray! We found ${data.data.totalHits} images."`);
   });
 }
@@ -70,8 +73,11 @@ loadBtn.addEventListener('click', onLoadBtnClick);
 
 function onLoadBtnClick() {
   page += 1;
-  getImage(name, page).then(data => {
-    renderMarkup(data);
+  getImage(input.value, page).then(data => {
+    gallery.insertAdjacentHTML('beforeEnd', renderMarkup(data));
+    if (data.data.hits.length < 40) {
+      loadBtn.classList.add('is-hidden');
+    }
   });
 }
 // onLoadBtnClick();
