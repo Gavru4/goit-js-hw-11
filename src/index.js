@@ -17,7 +17,7 @@ form.addEventListener('submit', onInputValue);
 let page = 1;
 
 function onInputValue(e) {
-  e.preventDefault(getImage());
+  e.preventDefault();
   const inputValue = input.value;
   page = 1;
   getImage(inputValue, page).then(data => {
