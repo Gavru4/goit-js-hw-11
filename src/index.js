@@ -21,7 +21,6 @@ function onInputValue(e) {
   const inputValue = input.value;
   page = 1;
   getImage(inputValue, page).then(data => {
-    console.log(data.data);
     if (data.data.hits.length === 0) {
       return Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.',
@@ -80,7 +79,6 @@ function onLoadBtnClick() {
     }
   });
 }
-// onLoadBtnClick();
 
 // const { height: cardHeight } = document
 //   .querySelector('.gallery')
