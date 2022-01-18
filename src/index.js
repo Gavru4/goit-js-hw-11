@@ -12,7 +12,7 @@ const input = document.querySelector('[name="searchQuery"]');
 const gallery = document.querySelector('.gallery');
 const loadBtn = document.querySelector('.load-more');
 
-input.form.addEventListener('submit', onInputValue);
+form.addEventListener('submit', onInputValue);
 
 let page = 1;
 
